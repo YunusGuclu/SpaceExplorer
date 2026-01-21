@@ -1,0 +1,194 @@
+# 🚀 SpaceExplorer — Gerçek Zamanlı Uzay Keşif Platformu
+
+SpaceExplorer, **uzayla ilgili güncel verileri tek bir platformda toplayan**,  
+**NASA ve açık uzay API’leri ile entegre çalışan**,  
+**otomatik zamanlayıcı (scheduler) altyapısına sahip modern bir Django web uygulamasıdır.**
+
+Bu proje; **ISS canlı takibi**, **uzay haberleri**, **gezegenler**, **cüce gezegenler**,  
+**asteroidler**, **gezegen uyduları**, **astronotlar** ve **SpaceX görevleri** gibi  
+birçok uzay verisini **anlık olarak API’lerden çekerek kullanıcıya sunar.**
+
+> 🌌 Tüm veriler manuel değil, **scheduler ile otomatik güncellenir.**  
+> 🔄 Veri akışı: **API → Veritabanı (cache) → Kullanıcı arayüzü**
+
+---
+## 🎯 Projenin Amacı
+
+SpaceExplorer projesinin temel amacı:
+
+- Uzayla ilgili **dağınık halde bulunan API verilerini tek merkezde toplamak**
+- Kullanıcılara **gerçek zamanlı ve güncel uzay verileri** sunmak
+- API tabanlı veri toplama + otomatik güncelleme mimarisini uygulamalı göstermek
+- Backend odaklı, **gerçek veri akışı olan profesyonel bir Django projesi** geliştirmek
+
+Bu proje özellikle:
+
+- Backend geliştirme
+- API entegrasyonu
+- Scheduler & otomatik veri yönetimi
+- Veri modelleme
+- Gerçek zamanlı sistem tasarımı
+
+alanlarında güçlü bir örnek sunar.
+
+---
+
+## ✨ Proje Özellikleri
+
+### 🛰️ ISS (International Space Station)
+- Canlı ISS konum takibi (enlem/boylam)
+- Uzaydaki kişi sayısı bilgisi
+- API’den anlık veri çekimi
+- JSON endpoint ile canlı veri sunumu
+
+### 📰 Uzay Haberleri
+- SpaceFlight News API entegrasyonu
+- En güncel uzay haberleri (maks. 30 haber)
+- Görsel destekli haber listesi
+- Otomatik güncelleme + eski veriyi temizleme
+
+### 🪐 Güneş Sistemi (Gezegenler)
+- Gezegenlerin temel bilgileri:
+  - Kütle, yerçekimi, yarıçap, uydu sayısı
+- Le Systeme Solaire API üzerinden otomatik veri çekimi
+
+### 🌙 Gezegen Uyduları
+- Gezegenlere ait doğal uydular
+- Keşif tarihi, keşfeden kişi
+- Fiziksel özellikler
+- Otomatik güncelleme (24 saatte bir)
+
+### 🌌 Cüce Gezegenler
+- Pluto, Ceres, Eris, Haumea, Makemake
+- Özel görseller + fiziksel bilimsel veriler
+- Uydu sayıları ve keşif bilgileri
+
+### ☄️ Asteroidler
+- Le Systeme Solaire API üzerinden asteroid verileri
+- Fiziksel ölçümler + yörünge bilgileri
+- Otomatik veri çekme sistemi
+
+### 👨‍🚀 Astronotlar
+- Uzayda bulunan aktif astronotlar
+- Ajans bilgileri (NASA, ESA, Roscosmos, JAXA, CNSA)
+- Görev/rol bilgisi + görseller
+- Otomatik aktif/pasif güncelleme
+
+### 🚀 SpaceX Görevleri
+- En son SpaceX fırlatma bilgisi
+- Görev tarihi, başarı durumu, detaylar
+- Video bağlantısı ve patch görselleri
+- Otomatik güncelleme (saatlik)
+
+---
+## 🧠 Sistem Mimarisi
+
+SpaceExplorer, sade ama gerçek bir backend mimarisiyle geliştirilmiştir.
+
+**Genel akış:**
+
+1. Harici uzay API’lerinden veri çekilir (`utils.py`)
+2. Veriler Django modelleri ile veritabanına kaydedilir
+3. APScheduler arka planda otomatik güncellemeleri yürütür
+4. Kullanıcılar güncel verileri web arayüzü üzerinden görüntüler
+
+Amaç:
+> **Güncel veri + hızlı sayfa yükleme + sürdürülebilir sistem**
+
+---
+
+## 🔗 Kullanılan API Kaynakları
+
+- **ISS Konum API**  
+  http://api.open-notify.org/iss-now.json
+
+- **Uzaydaki İnsanlar API**  
+  http://api.open-notify.org/astros.json
+
+- **SpaceX Son Fırlatma**  
+  https://api.spacexdata.com/v4/launches/latest
+
+- **Güneş Sistemi Verileri**  
+  https://api.le-systeme-solaire.net/rest/bodies/
+
+- **Uzay Haberleri API**  
+  https://api.spaceflightnewsapi.net/v4/articles
+
+---
+
+## 🌍 Sayfalar ve URL Yapısı
+
+| Sayfa | URL |
+|------|-----|
+| Ana Sayfa | `/` |
+| ISS Takip | `/iss/` |
+| Güneş Sistemi | `/solar-system/` |
+| Uzay Haberleri | `/news/` |
+| Gezegen Uyduları | `/planet-moons/` |
+| Cüce Gezegenler | `/dwarf-planets/` |
+| Asteroidler | `/asteroids/` |
+| Astronotlar | `/astronauts/` |
+| ISS Canlı API | `/api/iss-location/` |
+
+---
+
+## ⏱️ Otomatik Veri Güncellemeleri
+
+APScheduler kullanılarak veriler arka planda düzenli olarak yenilenir.
+
+| Veri | Güncelleme Süresi |
+|------|------------------|
+| SpaceX Fırlatma | 60 dakika |
+| ISS Konumu | Anlık |
+| Gezegen Verileri | 60 dakika |
+| Uzay Haberleri | 60 dakika |
+| Uydular | 24 saat |
+| Cüce Gezegenler | 24 saat |
+| Asteroidler | 24 saat |
+| Astronotlar | 24 saat |
+
+> Not: Geliştirme ortamı için scheduler `AppConfig.ready()` içerisinde başlatılmıştır.
+
+---
+
+## 🗃️ Kullanılan Veritabanı Modelleri
+
+- `SpaceXLaunch` → SpaceX fırlatma bilgileri  
+- `ISSLocation` → ISS konum geçmişi  
+- `SolarSystemBody` → Gezegenler  
+- `SpaceNews` → Uzay haberleri  
+- `PlanetMoon` → Gezegen uyduları  
+- `DwarfPlanet` → Cüce gezegenler  
+- `Asteroid` → Asteroid verileri  
+- `Astronaut` → Astronot bilgileri  
+
+---
+
+## 🛠️ Kullanılan Teknolojiler
+
+- Python 3.x  
+- Django 5.0.8  
+- SQLite  
+- APScheduler  
+- Requests  
+- Django Template Engine  
+
+---
+
+## ⚙️ Kurulum
+
+```bash
+git clone <repo-link>
+cd space-explorer
+
+python -m venv venv
+venv\Scripts\activate   # Windows
+# veya
+source venv/bin/activate  # Linux / Mac
+
+pip install -r requirements.txt
+
+python manage.py makemigrations
+python manage.py migrate
+
+python manage.py runserver
