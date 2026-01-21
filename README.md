@@ -185,7 +185,7 @@ APScheduler kullanılarak veriler arka planda düzenli olarak yenilenir.
 
 ## 🗂️ Uygulama Sayfaları (Routes) & Demo Görseller
 
-- **`/` → Ana sayfa (ISS özet + gezegenler + son haberler)**
+- **`/` → Ana sayfa (ISS özet + gezegenler + son haberler + Son SpaceX Fırlatması)**
 <img width="1517" height="906" alt="image" src="https://github.com/user-attachments/assets/b0b8f2ee-b8d7-492f-bd93-94cb4a58365a" />
 <img width="1491" height="906" alt="image" src="https://github.com/user-attachments/assets/bdb09ebc-e7b4-48b3-84ad-f1889c05be72" />
 
@@ -216,7 +216,6 @@ APScheduler kullanılarak veriler arka planda düzenli olarak yenilenir.
 - **`/news/` → Uzay haberleri**
 <img width="1536" height="907" alt="image" src="https://github.com/user-attachments/assets/43bbc08f-b1ba-4b13-a2ad-20ea59cc585d" />
 
-- **`/api/iss-location/` → ISS canlı konum JSON endpoint**
 
 ---
 ## 🛠️ Kullanılan Teknolojiler
