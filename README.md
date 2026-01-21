@@ -211,7 +211,7 @@ APScheduler kullanılarak veriler arka planda düzenli olarak yenilenir.
 
 
 - **`/asteroids/` → Asteroidler**
-  <img width="1536" height="907" alt="image" src="https://github.com/user-attachments/assets/13c86e90-0f44-4044-9102-7c4e865cee62" />
+<img width="1542" height="905" alt="image" src="https://github.com/user-attachments/assets/ee788268-b877-478d-aefb-9be2aea8149e" />
 
 
 - **`/news/` → Uzay haberleri**
