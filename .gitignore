@@ -1,0 +1,33 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+
+# Django
+db.sqlite3
+*.sqlite3
+media/
+staticfiles/
+*.log
+
+# Env / secrets
+.env
+.env.*
+!.env.example
+
+# Virtualenv / Conda
+venv/
+.venv/
+env/
+ENV/
+# (conda env klasörleri genelde proje dışında olur ama yine de)
+conda/
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db

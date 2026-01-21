@@ -1,0 +1,262 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="hero-section" style="background-image: url('https://images.unsplash.com/photo-1614728263952-84ea256f9679');">
+    <div class="hero-content">
+        <h1 class="display-1">Uzaydaki Astronotlar</h1>
+        <p class="lead">Şu anda uzayda görev yapan cesur kaşifler</p>
+    </div>
+</div>
+
+<div class="container my-5">
+    <section class="space-card-container">
+        
+        <h2 class="section-title">Canlı İstatistikler</h2>
+        
+        <div class="row row-cols-1 row-cols-md-2 row-cols-xl-4 g-4 mb-5">
+            
+            <div class="col">
+                <div class="stat-card h-100 d-flex flex-column justify-content-center align-items-center text-center p-4">
+                    <div class="stat-emoji mb-2">👩‍🚀</div>
+                    <h3 class="stat-title">Toplam Astronot</h3>
+                    <div class="display-4 fw-bold text-white">{{ astronauts.count }}</div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="stat-card h-100">
+                    <div class="stat-header">
+                        <span>🛰️ İstasyonlar</span>
+                    </div>
+                    <div class="stat-body">
+                        <ul class="stat-list">
+                            {% regroup astronauts|dictsort:"spacecraft" by spacecraft as spacecraft_list %}
+                            {% for spacecraft in spacecraft_list %}
+                            <li class="stat-item">
+                                <span>{{ spacecraft.grouper }}</span>
+                                <span class="stat-badge bg-info">{{ spacecraft.list|length }}</span>
+                            </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="stat-card h-100">
+                    <div class="stat-header">
+                        <span>🌍 Ajanslar</span>
+                    </div>
+                    <div class="stat-body">
+                        <ul class="stat-list">
+                            {% regroup astronauts|dictsort:"agency" by agency as agency_list %}
+                            {% for agency in agency_list %}
+                            <li class="stat-item">
+                                <span>{{ agency.grouper }}</span>
+                                <span class="stat-badge bg-primary">{{ agency.list|length }}</span>
+                            </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="stat-card h-100">
+                    <div class="stat-header">
+                        <span>🚀 Görevler</span>
+                    </div>
+                    <div class="stat-body">
+                        <ul class="stat-list">
+                            {% regroup astronauts|dictsort:"role" by role as role_list %}
+                            {% for role in role_list %}
+                            <li class="stat-item">
+                                <span>{{ role.grouper }}</span>
+                                <span class="stat-badge bg-warning text-dark">{{ role.list|length }}</span>
+                            </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <h2 class="section-title mt-5">Astronot Listesi</h2>
+
+        <div class="row">
+            {% for astronaut in astronauts %}
+            <div class="col-md-4 mb-4">
+                <div class="card bg-dark text-light h-100 astronaut-card-style-2">
+                    <div class="astronaut-icon-style-2">
+                        <span class="astronaut-emoji-style-2">👨‍🚀</span>
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title text-center mb-3">{{ astronaut.name }}</h5>
+                        <p class="card-text">
+                            <span class="d-block mb-2">
+                                <strong>Görev:</strong> <span class="badge bg-info">{{ astronaut.role }}</span>
+                            </span>
+                            <span class="d-block mb-1">
+                                <strong>Uzay Aracı:</strong> {{ astronaut.spacecraft }}
+                            </span>
+                            <span class="d-block mb-1">
+                                <strong>Ajans:</strong> <span class="badge bg-primary">{{ astronaut.agency }}</span>
+                            </span>
+                            <span class="d-block mt-2">
+                                <strong>Durum:</strong> 
+                                {% if astronaut.status == 'active' %}
+                                <span class="badge bg-success">Aktif Görevde</span>
+                                {% else %}
+                                <span class="badge bg-secondary">Görev Tamamlandı</span>
+                                {% endif %}
+                            </span>
+                        </p>
+                    </div>
+                    <div class="card-footer text-center border-top-0">
+                        <small class="text-muted">
+                            Son Güncelleme: {{ astronaut.last_updated|date:"d.m.Y" }}
+                        </small>
+                    </div>
+                </div>
+            </div>
+            {% empty %}
+            <div class="col-12">
+                <div class="alert alert-info text-center">
+                    Şu anda uzayda aktif astronot verisi bulunamadı.
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+
+    </section>
+</div>
+
+<style>
+    /* --- HERO BÖLÜMÜ --- */
+    .hero-section {
+        margin-top: -56px;
+        padding-top: 56px;
+        position: relative;
+        background-size: cover;
+        background-position: center;
+        height: 50vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        color: white;
+    }
+    .hero-section::before {
+        content: ''; position: absolute; top:0; left:0; right:0; bottom:0;
+        background: rgba(0,0,0,0.6);
+    }
+    .hero-content { position: relative; z-index: 2; }
+
+    /* --- GENEL KAPSAYICI --- */
+    .space-card-container {
+        background: rgba(255, 255, 255, 0.05);
+        backdrop-filter: blur(10px);
+        border-radius: 15px;
+        padding: 2rem;
+    }
+    .section-title {
+        color: white;
+        text-align: center;
+        margin-bottom: 2rem;
+        font-weight: 300;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        border-bottom: 1px solid rgba(255,255,255,0.1);
+        padding-bottom: 10px;
+        display: inline-block;
+        width: 100%;
+    }
+
+    /* --- BÖLÜM 1 CSS: İSTATİSTİK KARTLARI --- */
+    .stat-card {
+        background: rgba(0, 0, 0, 0.4);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 12px;
+        overflow: hidden;
+        transition: transform 0.2s;
+    }
+    .stat-card:hover { transform: translateY(-3px); }
+    
+    .stat-header {
+        background: rgba(255, 255, 255, 0.05);
+        padding: 12px 15px;
+        font-weight: 600;
+        color: #ddd;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        font-size: 1.1rem;
+    }
+    
+    .stat-emoji { font-size: 2.5rem; }
+    .stat-title { font-size: 1rem; color: #aaa; margin: 0; text-transform: uppercase; }
+
+    .stat-list { list-style: none; padding: 0; margin: 0; }
+    
+    .stat-item {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 10px 15px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        color: #eee;
+        font-size: 0.95rem;
+    }
+    .stat-item:last-child { border-bottom: none; }
+    
+    .stat-badge {
+        font-size: 0.85rem;
+        padding: 5px 10px;
+        border-radius: 20px;
+        min-width: 30px;
+        text-align: center;
+    }
+
+    /* --- BÖLÜM 2 CSS: ASTRONOT KARTLARI (Dönen Emojili Stil) --- */
+    .astronaut-card-style-2 {
+        transition: all 0.3s ease;
+        border: 1px solid rgba(255,255,255,0.1) !important; /* Hafif çerçeve ekledim uyum için */
+        background: rgba(0, 0, 0, 0.5) !important;
+        border-radius: 15px;
+        overflow: hidden;
+    }
+    
+    .astronaut-card-style-2:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+        background: rgba(0, 0, 0, 0.7) !important;
+    }
+
+    .astronaut-icon-style-2 {
+        height: 200px;
+        background: linear-gradient(45deg, #1a1a1a, #2c3e50);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+
+    .astronaut-emoji-style-2 {
+        font-size: 5rem;
+        transition: transform 0.3s ease;
+    }
+
+    .astronaut-card-style-2:hover .astronaut-emoji-style-2 {
+        transform: scale(1.2) rotate(15deg);
+    }
+
+    .card-footer {
+        background: rgba(0,0,0,0.2) !important;
+    }
+
+    @media (max-width: 768px) {
+        .hero-section { height: 40vh; }
+        .hero-section h1 { font-size: 2.5rem; }
+        .astronaut-icon-style-2 { height: 150px; }
+        .astronaut-emoji-style-2 { font-size: 4rem; }
+    }
+</style>
+{% endblock %}
