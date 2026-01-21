@@ -163,6 +163,23 @@ APScheduler kullanılarak veriler arka planda düzenli olarak yenilenir.
 - `Astronaut` → Astronot bilgileri  
 
 ---
+## 🔐 Veri Yönetimi Yaklaşımı
+
+- Tüm veriler API üzerinden otomatik çekilir
+
+- Veriler veritabanına cache amaçlı kaydedilir
+
+- API hatası durumunda:
+
+- Son başarılı veri kullanıcıya gösterilir
+
+- Eski veriler belirli periyotlarla temizlenir
+
+-Bu yapı sayesinde:
+
+-✅ API limitleri korunur
+-✅ Performans artar
+-✅ Kullanıcı her zaman veri görebilir
 
 ## 🛠️ Kullanılan Teknolojiler
 
@@ -173,20 +190,17 @@ APScheduler kullanılarak veriler arka planda düzenli olarak yenilenir.
 - Requests  
 - Django Template Engine  
 
+> Projenin düzgün çalışması için gerekli kütüphaneleri de kurmanız gerekmektedir.
 ---
 
 ## ⚙️ Kurulum
 
 ```bash
-git clone <repo-link>
-cd space-explorer
 
 python -m venv venv
 venv\Scripts\activate   # Windows
 # veya
 source venv/bin/activate  # Linux / Mac
-
-pip install -r requirements.txt
 
 python manage.py makemigrations
 python manage.py migrate
