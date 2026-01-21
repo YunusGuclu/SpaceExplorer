@@ -87,6 +87,8 @@ SpaceExplorer, sade ama gerçek bir backend mimarisiyle geliştirilmiştir.
 
 **Genel akış:**
 
+Scheduler, uygulama ayağa kalktığında Uzay/apps.py içindeki ready() fonksiyonu ile başlar.
+
 1. Harici uzay API’lerinden veri çekilir (`utils.py`)
 2. Veriler Django modelleri ile veritabanına kaydedilir
 3. APScheduler arka planda otomatik güncellemeleri yürütür
@@ -183,37 +185,39 @@ APScheduler kullanılarak veriler arka planda düzenli olarak yenilenir.
 
 ## 🗂️ Uygulama Sayfaları (Routes) & Demo Görseller
 
-- `/` → Ana sayfa (ISS özet + gezegenler + son haberler)
+- **`/` → Ana sayfa (ISS özet + gezegenler + son haberler)**
 <img width="1517" height="906" alt="image" src="https://github.com/user-attachments/assets/b0b8f2ee-b8d7-492f-bd93-94cb4a58365a" />
 <img width="1491" height="906" alt="image" src="https://github.com/user-attachments/assets/bdb09ebc-e7b4-48b3-84ad-f1889c05be72" />
 
 
 
-- `/iss/` → ISS takip ekranı
+- **`/iss/` → ISS takip ekranı**
 <img width="1592" height="901" alt="image" src="https://github.com/user-attachments/assets/07b587af-19da-42ae-9ca9-fcd12747b1f5" />
 
 
-- `/news/` → Uzay haberleri
-<img width="1536" height="907" alt="image" src="https://github.com/user-attachments/assets/43bbc08f-b1ba-4b13-a2ad-20ea59cc585d" />
+- **`/astronauts/` → Astronotlar**
+<img width="1540" height="903" alt="image" src="https://github.com/user-attachments/assets/e32f5fca-061b-4e97-893e-47c29b1f57b3" />
 
 
-- `/solar-system/` → Gezegenler
+- **`/solar-system/` → Gezegenler**
 <img width="1532" height="902" alt="image" src="https://github.com/user-attachments/assets/8b584267-1ea3-489a-a2dd-f7265eea65e7" />
 
 
-- `/planet-moons/` → Uydular
+- **`/planet-moons/` → Uydular**
 <img width="1537" height="906" alt="image" src="https://github.com/user-attachments/assets/26af8a4e-0f14-46f9-b5db-4ff2cf49b310" />
 
-- `/dwarf-planets/` → Cüce gezegenler
-<img width="1540" height="906" alt="image" src="https://github.com/user-attachments/assets/51e10a14-3128-4e4b-85d8-531b9e685bd2" />
+- **`/dwarf-planets/` → Cüce gezegenler**
+<img width="1542" height="906" alt="image" src="https://github.com/user-attachments/assets/5ae40a06-8d1c-49b9-a6c3-e4f568b02404" />
 
-- `/asteroids/` → Asteroidler
+
+- **`/asteroids/` → Asteroidler**
   <img width="1536" height="907" alt="image" src="https://github.com/user-attachments/assets/13c86e90-0f44-4044-9102-7c4e865cee62" />
 
-- `/astronauts/` → Astronotlar
-<img width="1540" height="903" alt="image" src="https://github.com/user-attachments/assets/e32f5fca-061b-4e97-893e-47c29b1f57b3" />
 
-- `/api/iss-location/` → ISS canlı konum JSON endpoint
+- **`/news/` → Uzay haberleri**
+<img width="1536" height="907" alt="image" src="https://github.com/user-attachments/assets/43bbc08f-b1ba-4b13-a2ad-20ea59cc585d" />
+
+- **`/api/iss-location/` → ISS canlı konum JSON endpoint**
 
 ---
 ## 🛠️ Kullanılan Teknolojiler
@@ -237,6 +241,21 @@ python -m venv venv
 venv\Scripts\activate   # Windows
 # veya
 source venv/bin/activate  # Linux / Mac
+
+---
+
+## 👨‍💻 Geliştirici
+
+**Yunus Güçlü**  
+Software Engineer
+
+---
+
+## 📄 Lisans
+
+Bu proje kişisel eğitim ve portföy amacıyla geliştirilmiştir.  
+Ticari kullanım için geliştirici izni gereklidir.
+
 
 python manage.py makemigrations
 python manage.py migrate
