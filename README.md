@@ -190,7 +190,6 @@ APScheduler kullanılarak veriler arka planda düzenli olarak yenilenir.
 <img width="1491" height="906" alt="image" src="https://github.com/user-attachments/assets/bdb09ebc-e7b4-48b3-84ad-f1889c05be72" />
 
 
-
 - **`/iss/` → ISS takip ekranı**
 <img width="1592" height="901" alt="image" src="https://github.com/user-attachments/assets/07b587af-19da-42ae-9ca9-fcd12747b1f5" />
 
@@ -242,8 +241,11 @@ venv\Scripts\activate   # Windows
 # veya
 source venv/bin/activate  # Linux / Mac
 
----
+python manage.py makemigrations
+python manage.py migrate
 
+python manage.py runserver
+---
 ## 👨‍💻 Geliştirici
 
 **Yunus Güçlü**  
@@ -255,9 +257,3 @@ Software Engineer
 
 Bu proje kişisel eğitim ve portföy amacıyla geliştirilmiştir.  
 Ticari kullanım için geliştirici izni gereklidir.
-
-
-python manage.py makemigrations
-python manage.py migrate
-
-python manage.py runserver
